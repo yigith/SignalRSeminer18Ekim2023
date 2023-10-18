@@ -1,16 +1,16 @@
 # ASP.NET SignalR
-**Konuþmacý:** Yiðit HACIEFENDÝOÐLU
+**KonuÅŸmacÄ±:** YiÄŸit HACIEFENDÄ°OÄžLU
 
 ![Bilge Adam Webinar](afis.jpg)
 
 **Tarih:** 18.10.2023
 
-**Baþlangýç - Bitiþ Saati:** 20:00 - 21:00
+**BaÅŸlangÄ±Ã§ - BitiÅŸ Saati:** 20:00 - 21:00
 
 **Link:** https://www.youtube.com/watch?v=1pzsA-n8JK8
 
 
-## Faydalý Linkler
+## FaydalÄ± Linkler
 - https://dotnet.microsoft.com/en-us/apps/aspnet/signalr
 - https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction
 - https://github.com/SignalR/SignalR
@@ -18,10 +18,10 @@
 
 
 ## ASP.NET SignalR Nedir?
-- ASP.NET geliþtiricilerinin gerçek zamanlý web uygulamasý geliþtirme sürecini aþýrý kolay hale getiren bir kütüphanedir.
-- Server ve Client arasýnda çift yönlü (bi-directional) sürekli baðlantý saðlar.
-- Web Sockets’i destekler.
-- Yeni teknolojileri desteklemeyen eski tarayýcýlarda çalýþabilmesi için o tarayýcýlara uygun teknikleri (polling, forever frames, vs) de ihtiyaç halinde kullanýr.
+- ASP.NET geliÅŸtiricilerinin gerÃ§ek zamanlÄ± web uygulamasÄ± geliÅŸtirme sÃ¼recini aÅŸÄ±rÄ± kolay hale getiren bir kÃ¼tÃ¼phanedir.
+- Server ve Client arasÄ±nda Ã§ift yÃ¶nlÃ¼ (bi-directional) sÃ¼rekli baÄŸlantÄ± saÄŸlar.
+- Web Socketsâ€™i destekler.
+- Yeni teknolojileri desteklemeyen eski tarayÄ±cÄ±larda Ã§alÄ±ÅŸabilmesi iÃ§in o tarayÄ±cÄ±lara uygun teknikleri (polling, forever frames, vs) de ihtiyaÃ§ halinde kullanÄ±r.
 
 ## SignalR Fallback
 - Web Sockets
@@ -30,7 +30,7 @@
 - Long Polling
 
 ## Kurulum
-Bir ASP.NET Web Application projesi açýldýktan sonra NuGet Package Manager aracýlýðýyla Microsoft.AspNet.SignalR kütüphanesi yüklenir.
+Bir ASP.NET Web Application projesi aÃ§Ä±ldÄ±ktan sonra NuGet Package Manager aracÄ±lÄ±ÄŸÄ±yla Microsoft.AspNet.SignalR kÃ¼tÃ¼phanesi yÃ¼klenir.
 
 > Install-Package Microsoft.AspNet.SignalR
 
@@ -67,8 +67,8 @@ namespace SignalROnCalisma.Hubs
 ## Index.cshtml
 ```html
 <form id="frmMesaj">
-    <input id="txtMesaj" type="text" placeholder="mesajýnýz.." required />
-    <button>Gönder</button>
+    <input id="txtMesaj" type="text" placeholder="mesajÄ±nÄ±z.." required />
+    <button>GÃ¶nder</button>
 </form>
 
 <ul id="mesajlar"></ul>
@@ -84,7 +84,7 @@ namespace SignalROnCalisma.Hubs
 const ul = document.getElementById("mesajlar");
 const txtMesaj = document.getElementById("txtMesaj");
 const frmMesaj = document.getElementById("frmMesaj");
-const kullanici = prompt("Kullanýcý adýnýz:");
+const kullanici = prompt("KullanÄ±cÄ± adÄ±nÄ±z:");
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/sohbetHub")
@@ -110,9 +110,9 @@ frmMesaj.onsubmit = function (e) {
 
 connection.start()
     .then(function () {
-        console.log("baðlantý saðlandý");
+        console.log("baÄŸlantÄ± saÄŸlandÄ±");
     })
     .catch(function (err) {
-        console.log("baðlantý hatasý");
+        console.log("baÄŸlantÄ± hatasÄ±");
     });
 ```
