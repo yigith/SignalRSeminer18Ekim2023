@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form id="frmMesaj">
+    <input id="txtMesaj" type="text" placeholder="mesajınız.." required />
+    <button>Gönder</button>
+</form>
+
+<ul id="mesajlar"></ul>
+
+@section Scripts {
+    <script>
+        const ul = document.getElementById("mesajlar");
+        const txtMesaj = document.getElementById("txtMesaj");
+        const frmMesaj = document.getElementById("frmMesaj");
+        const kullanici = prompt("Kullanıcı adınız:");
+        const renk = `rgba(${r()}, ${r()}, ${r()}, 0.75)`;
+
+        function r() {
+            return Math.floor(Math.random() * 256);
+        }
+        // CLIENT - HUB BAĞLANTISININ AYARLANMASI
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/sohbetHub")
+            .build();
+
+        // SUNUCUDAN YENİ MESAJIN ALINMASI
+        connection.on("YeniMesaj", function (kullanici, mesaj) {
+            const li = document.createElement("li");
+            li.textContent = `${kullanici}: ${mesaj}`;
+            ul.prepend(li);
+        });
+
+        // SUNUCUYA FARE KONUMUNUN GÖNDERİLMESİ
+        window.onmousemove = function (e) {
+            connection.invoke("KonumGonder", renk, e.clientX, e.clientY);
+        };
+
+        // SUNUCUDAN FARE KONUMUNUN ALINMASI
+        connection.on("KonumAlindi", function (baglantiId, renk, x, y) {
+            let kutu = document.getElementById(baglantiId);
+
+            if (!kutu) {
+                kutu = document.createElement("div");
+                kutu.className = "kutu";
+                kutu.id = baglantiId;
+                document.body.append(kutu);
+            }
+            kutu.style.backgroundColor = renk;
+            kutu.style.left = x + "px";
+            kutu.style.top = y + "px";
+        });
+
+        // SUNUCUYA MESAJIN GÖNDERİLMESİ
+        frmMesaj.onsubmit = function (e) {
+            e.preventDefault();
+
+            connection
+                .invoke("MesajGonder", kullanici, txtMesaj.value)
+                .catch(function (err) {
+                    console.log(err);
+                });
+
+            txtMesaj.value = "";
+        };
+
+        // BAĞLANTIYI BAŞLAT
+        connection.start()
+            .then(function () {
+                console.log("bağlantı sağlandı");
+            })
+            .catch(function (err) {
+                console.log("bağlantı hatası");
+            });
+    </script>
+}
