@@ -34,7 +34,7 @@ Bir ASP.NET Web Application projesi açýldýktan sonra NuGet Package Manager aracý
 
 > Install-Package Microsoft.AspNet.SignalR
 
-## Startup (Program.cs)
+## Program.cs
 ```csharp
 // ...
 
@@ -74,12 +74,12 @@ namespace SignalROnCalisma.Hubs
 <ul id="mesajlar"></ul>
 ```
 
-### _Layout.cshtml
+## _Layout.cshtml
 ```html
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 ```
 
-## javascript
+## JavaScript
 ```javascript
 const ul = document.getElementById("mesajlar");
 const txtMesaj = document.getElementById("txtMesaj");
